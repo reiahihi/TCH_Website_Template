@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="TCH_Website_Template:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/TCH_Website_Template_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="TCH_Website_Template/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="TCH_Website_Template" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
