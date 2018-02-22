@@ -1379,7 +1379,7 @@ iframe {
 }
 
 .img-parttern {
-    background: url(/assets/img/Pattern.png?v=1) center;
+    background: url(../img/Pattern.png) center;
     background-size: contain !important;
     height: 15px;
     width: 100%;
@@ -2079,6 +2079,7 @@ html.bg-order {
 
 .category-content-small {
     display: none;
+    height: 0;
 }
 
 .category-content-small.active {
