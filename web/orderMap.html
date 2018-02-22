@@ -1,0 +1,660 @@
+<html>
+<head>
+    <style type="text/css">
+        .pac-container {
+            background-color: #fff;
+            position: absolute !important;
+            z-index: 1000;
+            border-radius: 2px;
+            border-top: 1px solid #d9d9d9;
+            font-family: Arial, sans-serif;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            overflow: hidden
+        }
+
+        .pac-logo:after {
+            content: "";
+            padding: 1px 1px 1px 0;
+            height: 16px;
+            text-align: right;
+            display: block;
+            background-image: url(https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white3.png);
+            background-position: right;
+            background-repeat: no-repeat;
+            background-size: 120px 14px
+        }
+
+        .hdpi.pac-logo:after {
+            background-image: url(https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white3_hdpi.png)
+        }
+
+        .pac-item {
+            cursor: default;
+            padding: 0 4px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            line-height: 30px;
+            text-align: left;
+            border-top: 1px solid #e6e6e6;
+            font-size: 11px;
+            color: #999
+        }
+
+        .pac-item:hover {
+            background-color: #fafafa
+        }
+
+        .pac-item-selected, .pac-item-selected:hover {
+            background-color: #ebf2fe
+        }
+
+        .pac-matched {
+            font-weight: 700
+        }
+
+        .pac-item-query {
+            font-size: 13px;
+            padding-right: 3px;
+            color: #000
+        }
+
+        .pac-icon {
+            width: 15px;
+            height: 20px;
+            margin-right: 7px;
+            margin-top: 6px;
+            display: inline-block;
+            vertical-align: top;
+            background-image: url(https://maps.gstatic.com/mapfiles/api-3/images/autocomplete-icons.png);
+            background-size: 34px
+        }
+
+        .hdpi .pac-icon {
+            background-image: url(https://maps.gstatic.com/mapfiles/api-3/images/autocomplete-icons_hdpi.png)
+        }
+
+        .pac-icon-search {
+            background-position: -1px -1px
+        }
+
+        .pac-item-selected .pac-icon-search {
+            background-position: -18px -1px
+        }
+
+        .pac-icon-marker {
+            background-position: -1px -161px
+        }
+
+        .pac-item-selected .pac-icon-marker {
+            background-position: -18px -161px
+        }
+
+        .pac-placeholder {
+            color: gray
+        }
+    </style>
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <style type="text/css">.gm-style .gm-style-cc span, .gm-style .gm-style-cc a, .gm-style .gm-style-mtc div {
+        font-size: 10px
+    }
+    </style>
+    <style type="text/css">@media print {
+        .gm-style .gmnoprint, .gmnoprint {
+            display: none
+        }
+    }
+
+    @media screen {
+        .gm-style .gmnoscreen, .gmnoscreen {
+            display: none
+        }
+    }</style>
+    <style type="text/css">.gm-style-pbc {
+        transition: opacity ease-in-out;
+        background-color: rgba(0, 0, 0, 0.45);
+        text-align: center
+    }
+
+    .gm-style-pbt {
+        font-size: 22px;
+        color: white;
+        font-family: Roboto, Arial, sans-serif;
+        position: relative;
+        margin: 0;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%)
+    }
+    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <meta property="og:image" content="https://order.thecoffeehouse.vnassets/img/tch.jpg?v=2">
+    <meta property="og:title" content="The Coffee House">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
+    <meta property="og:url" content="https://order.thecoffeehouse.vn">
+    <meta property="og:description"
+          content="Đặt Cafe  Trực Tuyến TpHCM - Hà Nội - Đà Nẵng Giao hàng tận nơi miễn phí &amp; nhanh với tiêu chí "
+          1="" món="" cũng="" giao=""
+    ".="" www.thecoffeehouse.vn="" truy="" cập="" và="" gọi="" đặt="" hàng="" 1800="" 6936="" !"="">
+    <style>
+        .loading-mobile {
+            display: block;
+            position: fixed;
+            background-color: #333;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99999;
+            text-align: center;
+        }
+
+        .loading-mobile .loading-logo {
+            position: relative;
+            top: calc(50% - 40px);
+        }
+
+        .loading-mobile .loading-logo img {
+            width: 100px;
+            border: 1px solid #fff;
+            padding: 10px;
+        }
+
+        .loading-mobile .icon-loading {
+            position: absolute;
+            top: 10px;
+            left: calc(50% - 100px);
+            display: inline-block;
+        }
+
+        @-webkit-keyframes uil-ripple {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 0;
+                margin: 0 0 0 0;
+            }
+            33% {
+                width: 44%;
+                height: 44%;
+                margin: -22% 0 0 -22%;
+                opacity: 1;
+            }
+            100% {
+                width: 88%;
+                height: 88%;
+                margin: -44% 0 0 -44%;
+                opacity: 0;
+            }
+        }
+
+        @-webkit-keyframes uil-ripple {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 0;
+                margin: 0 0 0 0;
+            }
+            33% {
+                width: 44%;
+                height: 44%;
+                margin: -22% 0 0 -22%;
+                opacity: 1;
+            }
+            100% {
+                width: 88%;
+                height: 88%;
+                margin: -44% 0 0 -44%;
+                opacity: 0;
+            }
+        }
+
+        @-moz-keyframes uil-ripple {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 0;
+                margin: 0 0 0 0;
+            }
+            33% {
+                width: 44%;
+                height: 44%;
+                margin: -22% 0 0 -22%;
+                opacity: 1;
+            }
+            100% {
+                width: 88%;
+                height: 88%;
+                margin: -44% 0 0 -44%;
+                opacity: 0;
+            }
+        }
+
+        @-ms-keyframes uil-ripple {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 0;
+                margin: 0 0 0 0;
+            }
+            33% {
+                width: 44%;
+                height: 44%;
+                margin: -22% 0 0 -22%;
+                opacity: 1;
+            }
+            100% {
+                width: 88%;
+                height: 88%;
+                margin: -44% 0 0 -44%;
+                opacity: 0;
+            }
+        }
+
+        @-moz-keyframes uil-ripple {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 0;
+                margin: 0 0 0 0;
+            }
+            33% {
+                width: 44%;
+                height: 44%;
+                margin: -22% 0 0 -22%;
+                opacity: 1;
+            }
+            100% {
+                width: 88%;
+                height: 88%;
+                margin: -44% 0 0 -44%;
+                opacity: 0;
+            }
+        }
+
+        @-webkit-keyframes uil-ripple {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 0;
+                margin: 0 0 0 0;
+            }
+            33% {
+                width: 44%;
+                height: 44%;
+                margin: -22% 0 0 -22%;
+                opacity: 1;
+            }
+            100% {
+                width: 88%;
+                height: 88%;
+                margin: -44% 0 0 -44%;
+                opacity: 0;
+            }
+        }
+
+        @-o-keyframes uil-ripple {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 0;
+                margin: 0 0 0 0;
+            }
+            33% {
+                width: 44%;
+                height: 44%;
+                margin: -22% 0 0 -22%;
+                opacity: 1;
+            }
+            100% {
+                width: 88%;
+                height: 88%;
+                margin: -44% 0 0 -44%;
+                opacity: 0;
+            }
+        }
+
+        @keyframes uil-ripple {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 0;
+                margin: 0 0 0 0;
+            }
+            33% {
+                width: 44%;
+                height: 44%;
+                margin: -22% 0 0 -22%;
+                opacity: 1;
+            }
+            100% {
+                width: 88%;
+                height: 88%;
+                margin: -44% 0 0 -44%;
+                opacity: 0;
+            }
+        }
+
+        .uil-ripple-css {
+            background: none;
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+
+        .uil-ripple-css div {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: 0;
+            width: 0;
+            height: 0;
+            opacity: 0;
+            border-radius: 50%;
+            border-width: 12px;
+            border-style: solid;
+            -ms-animation: uil-ripple 2s ease-out infinite;
+            -moz-animation: uil-ripple 2s ease-out infinite;
+            -webkit-animation: uil-ripple 2s ease-out infinite;
+            -o-animation: uil-ripple 2s ease-out infinite;
+            animation: uil-ripple 2s ease-out infinite;
+        }
+
+        .uil-ripple-css div:nth-of-type(1) {
+            border-color: #ffffff;
+        }
+
+        .uil-ripple-css div:nth-of-type(2) {
+            border-color: #FF792C;
+            -ms-animation-delay: 1s;
+            -moz-animation-delay: 1s;
+            -webkit-animation-delay: 1s;
+            -o-animation-delay: 1s;
+            animation-delay: 1s;
+        }
+    </style>
+
+    <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png">
+
+    <title>The Coffee House - Gọi món nhanh - Giao hàng miễn phí</title>
+
+
+</head>
+
+<body class="">
+
+<div class="app-container">
+    <div class="container main-wrapper-pc" data-reactid=".0">
+        <div class="col-sm-8 col-right" data-reactid=".0.0">
+            <div class="cart-background" data-reactid=".0.0.0"></div>
+            <img class="bg-left-main" src="assets/img/menu.gif" data-reactid=".0.0.1" style="display: none;">
+            <img class="bg-left-order" src="assets/img/order.gif" data-reactid=".0.0.2">
+            <i class="fa fa-times close-map" id="close-map"  style="display: inline;"></i>
+
+
+            <div class="map-container" data-reactid=".0.0.4" style="opacity: 1; display: block;">
+                <div id="map" class="map" data-reactid=".0.0.4.0" style="position: relative; overflow: hidden;">
+                    <div style="height: 100%; width: 100%; position: absolute; top: 0px; left: 0px; background-color: rgb(229, 227, 223);">
+                        <div style="overflow: hidden;"></div>
+                        <div class="gm-style"
+                             style="position: absolute; z-index: 0; left: 0px; top: 0px; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px;">
+                            <div tabindex="0"
+                                 style="position: absolute; z-index: 0; left: 0px; top: 0px; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; cursor: url(&quot;https://maps.gstatic.com/mapfiles/openhand_8_8.cur&quot;), default; touch-action: none;">
+                                <div style="z-index: 1; position: absolute; left: 50%; top: 50%; transform: translate(0px, 0px);">
+                                    <div style="position: absolute; left: 0px; top: 0px; z-index: 100; width: 100%;">
+                                        <div style="position: absolute; left: 0px; top: 0px; z-index: 0;">
+                                            <div style="position: absolute; z-index: 1; transform: matrix(1, 0, 0, 1, -104, -137);">
+                                                <div style="width: 256px; height: 256px; position: absolute; left: 0px; top: 0px;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="position: absolute; left: 0px; top: 0px; z-index: 101; width: 100%;"></div>
+                                    <div style="position: absolute; left: 0px; top: 0px; z-index: 102; width: 100%;"></div>
+                                    <div style="position: absolute; left: 0px; top: 0px; z-index: 103; width: 100%;"></div>
+                                    <div style="position: absolute; left: 0px; top: 0px; z-index: 0;">
+                                        <div style="position: absolute; z-index: 1; transform: matrix(1, 0, 0, 1, -104, -137);"></div>
+                                    </div>
+                                </div>
+                                <div class="gm-style-pbc"
+                                     style="z-index: 2; position: absolute; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; left: 0px; top: 0px; opacity: 0;">
+                                    <p class="gm-style-pbt"></p></div>
+                                <div style="z-index: 3; position: absolute; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; left: 0px; top: 0px; touch-action: pan-x pan-y;">
+                                    <div style="z-index: 1; position: absolute; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; left: 0px; top: 0px;"></div>
+                                    <div style="z-index: 4; position: absolute; left: 50%; top: 50%; transform: translate(0px, 0px);">
+                                        <div style="position: absolute; left: 0px; top: 0px; z-index: 104; width: 100%;"></div>
+                                        <div style="position: absolute; left: 0px; top: 0px; z-index: 105; width: 100%;"></div>
+                                        <div style="position: absolute; left: 0px; top: 0px; z-index: 106; width: 100%;"></div>
+                                        <div style="position: absolute; left: 0px; top: 0px; z-index: 107; width: 100%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <iframe frameborder="0" src="about:blank"
+                                    style="z-index: -1; position: absolute; width: 100%; height: 100%; top: 0px; left: 0px; border: none;"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-sm-4 col-left" data-reactid=".0.1">
+            <img class="bg-right" src="assets/img/main-left.gif"
+                                                                data-reactid=".0.1.0">
+            <button id="loadMap"> map</button>
+            <div class="info-component" data-reactid=".0.1.1"><img src="assets/img/logo_tch_black.png" class="title"
+                                                                   data-reactid=".0.1.1.0">
+                <form data-reactid=".0.1.1.1">
+                    <div class="name-phone-info-input" data-reactid=".0.1.1.1.0" style="display: none;"><label
+                            data-reactid=".0.1.1.1.0.0">Thông tin người nhận </label>
+                        <div class="form-group" data-reactid=".0.1.1.1.0.1"><input type="text"
+                                                                                   class="form-control input-info input-name"
+                                                                                   id="name-info" placeholder="Tên"
+                                                                                   data-reactid=".0.1.1.1.0.1.0"><input
+                                type="text" class="form-control input-info input-phone" id="phone-info"
+                                placeholder="Số điện thoại" data-reactid=".0.1.1.1.0.1.1"></div>
+                        <div class="form-group" data-reactid=".0.1.1.1.0.2"><input type="email"
+                                                                                   class="form-control input-info input-email"
+                                                                                   id="email-info" placeholder="Email"
+                                                                                   data-reactid=".0.1.1.1.0.2.0"></div>
+                        <div class="alert alert-danger tch-warning tch-warning-name hidden" data-reactid=".0.1.1.1.0.3">
+                            Vui lòng nhập đầy đủ tên và số điện thoại
+                        </div>
+                        <div class="alert alert-danger tch-warning tch-warning-phone hidden"
+                             data-reactid=".0.1.1.1.0.4">Vui lòng nhập đúng số điện thoại
+                        </div>
+                        <div class="alert alert-danger tch-warning tch-warning-email hidden"
+                             data-reactid=".0.1.1.1.0.5">Vui lòng nhập đúng định dạng email
+                        </div>
+                    </div>
+                    <div class="name-phone-info-label" data-reactid=".0.1.1.1.1" style="display: block;">
+                        <div data-reactid=".0.1.1.1.1.0" class="info-label-container"><label
+                                class="label-info-text lbl-normal" data-reactid=".0.1.1.1.1.0.0">Thông tin người nhận
+                            :</label><i class="fa fa-pencil-square icon-edit" data-reactid=".0.1.1.1.1.0.1"></i>
+                            <div class="lbl-bold" data-reactid=".0.1.1.1.1.0.2"><span
+                                    data-reactid=".0.1.1.1.1.0.2.0"><span
+                                    data-reactid=".0.1.1.1.1.0.2.0.0">wef</span><span data-reactid=".0.1.1.1.1.0.2.0.1"> - </span><span
+                                    data-reactid=".0.1.1.1.1.0.2.0.2">0909688235</span></span>
+                                <div data-reactid=".0.1.1.1.1.0.2.1">Email :123@gmail.com</div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="delivery-time-component" data-reactid=".0.1.2" style="display: none;">
+                <div class="delivery-option" data-reactid=".0.1.2.0">
+                    <div class="time-working" data-reactid=".0.1.2.0.0">
+                        <div class="radio" data-reactid=".0.1.2.0.0.0"><label class="delivery-time-radio"
+                                                                              data-reactid=".0.1.2.0.0.0.0"><img
+                                src="assets/img/option_active.png" class="option-radio"
+                                data-reactid=".0.1.2.0.0.0.0.0"><span
+                                data-reactid=".0.1.2.0.0.0.0.1">Giao hàng ngay</span></label></div>
+                        <div class="radio-right" data-reactid=".0.1.2.0.0.1"><label class="delivery-time-radio"
+                                                                                    data-reactid=".0.1.2.0.0.1.0"><img
+                                src="assets/img/option_inactive.png" class="option-radio"
+                                data-reactid=".0.1.2.0.0.1.0.0"><span
+                                data-reactid=".0.1.2.0.0.1.0.1">Chọn thời gian</span></label></div>
+                    </div>
+                </div>
+            </div>
+            <div class="address-component" data-reactid=".0.1.3">
+                <div class="address-input" data-reactid=".0.1.3.0" style="display: none;">
+                    <div class="form-group div-address-pc" data-reactid=".0.1.3.0.0"><label data-reactid=".0.1.3.0.0.0">Địa
+                        điểm giao hàng </label><i class="fa fa-pencil edit-address" id="edit-address"
+                                                  title="Chỉnh sửa vị trí" data-reactid=".0.1.3.0.0.1"
+                                                  style="display: none;"></i><i
+                            class="fa fa-location-arrow my-current-location-button" id="my-current-location-button"
+                            aria-hidden="true" data-reactid=".0.1.3.0.0.2"
+                            style="opacity: 1; pointer-events: auto;"></i>
+                        <div class="my-current-location-button warning-location" data-toggle="modal"
+                             data-target="#warninglocationModal" data-reactid=".0.1.3.0.0.3" style="display: block;"><i
+                                class="fa fa-exclamation-triangle" data-reactid=".0.1.3.0.0.3.0"></i></div>
+                        <input type="text" id="numberAddress" placeholder="Địa chỉ"
+                               class="input-address input-info form-control" data-reactid=".0.1.3.0.0.4"
+                               autocomplete="off"></div>
+                    <a class="btn-set-state" data-reactid=".0.1.3.0.1"></a>
+                    <div class="form-group" data-reactid=".0.1.3.0.2"><input type="text" id="districtAddress"
+                                                                             disabled="" placeholder="Quận/huyện"
+                                                                             class="form-control input-info input-address address-half"
+                                                                             data-reactid=".0.1.3.0.2.0">
+                        <div class="pad-address" data-reactid=".0.1.3.0.2.1"></div>
+                        <input type="text" id="cityAddress" disabled="" placeholder="Tỉnh/thành phố"
+                               class="form-control input-info input-address address-half"
+                               data-reactid=".0.1.3.0.2.2"><input type="text" id="formattedAddress"
+                                                                  class="formattedAddress"
+                                                                  data-reactid=".0.1.3.0.2.3"><input type="text"
+                                                                                                     id="id_state"
+                                                                                                     class="formattedAddress"
+                                                                                                     data-reactid=".0.1.3.0.2.4"><input
+                                type="text" id="id_district" class="formattedAddress" data-reactid=".0.1.3.0.2.5"><input
+                                type="text" id="selected_address" class="formattedAddress"
+                                data-reactid=".0.1.3.0.2.6"><input type="number" id="lat" class="formattedAddress"
+                                                                   data-reactid=".0.1.3.0.2.7"><input type="number"
+                                                                                                      id="lng"
+                                                                                                      class="formattedAddress"
+                                                                                                      data-reactid=".0.1.3.0.2.8">
+                    </div>
+                    <div class="alert alert-danger tch-warning tch-warning-address hidden" data-reactid=".0.1.3.0.3">Vui
+                        lòng nhập địa chỉ để giao hàng
+                    </div>
+                    <div class="alert alert-danger tch-warning tch-warning-country" data-reactid=".0.1.3.0.4"
+                         style="display: none;">Chúng tôi không hỗ trợ quốc gia của bạn
+                    </div>
+                    <div class="alert alert-danger tch-warning tch-warning-state" data-reactid=".0.1.3.0.5"
+                         style="display: none;">Chúng tôi không hỗ trợ tỉnh thành của bạn
+                    </div>
+                    <div class="alert alert-danger tch-warning tch-warning-district" data-reactid=".0.1.3.0.6"
+                         style="display: none;">Chúng tôi không hỗ trợ quận huyện của bạn
+                    </div>
+                </div>
+                <div class="address-label" data-reactid=".0.1.3.1" style="display: block;">
+                    <div data-reactid=".0.1.3.1.0" class="address-label-container"><i
+                            class="fa fa-pencil-square icon-edit" data-reactid=".0.1.3.1.0.0"></i><label
+                            class="label-info-text lbl-normal" data-reactid=".0.1.3.1.0.1"> Địa chỉ người nhận
+                        : </label>
+                        <div class="lbl-bold" data-reactid=".0.1.3.1.0.2">131 Nam Kỳ Khởi Nghĩa, Bến Thành, Quận 1, Hồ
+                            Chí Minh
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="info-cart" data-reactid=".0.1.4" style="display: block;"><i
+                    class=" fa-pencil-square icon-edit icon-edit-menu" data-reactid=".0.1.4.0"
+                    style="display: inline;"></i><img src="assets/img/ly.png" class="glass-icon"
+                                                      data-reactid=".0.1.4.1"><i class="fa fa-times multi-icon"
+                                                                                 aria-hidden="true"
+                                                                                 data-reactid=".0.1.4.2"></i><span
+                    class="quantity-info-cart" data-reactid=".0.1.4.3">2</span><img src="assets/img/pause-symbol.png"
+                                                                                    class="equal-icon"
+                                                                                    data-reactid=".0.1.4.4"><span
+                    class="total-price-info-cart" data-reactid=".0.1.4.5"><span data-reactid=".0.1.4.5.0"><span
+                    data-reactid=".0.1.4.5.0.0">77.000</span><span data-reactid=".0.1.4.5.0.1">đ</span></span></span>
+            </div>
+            <div class="info-discount-container" data-reactid=".0.1.5" style="display: none;">
+                <div class="info-discount" data-reactid=".0.1.5.0">
+                    <div class="discount-coupon" data-reactid=".0.1.5.0.1">
+                        <div class="discount-icon" data-reactid=".0.1.5.0.1.0"><i class="fa fa-ticket"
+                                                                                  data-reactid=".0.1.5.0.1.0.0"></i>
+                        </div>
+                        <div class="discount-desc-input-coupon" data-reactid=".0.1.5.0.1.1"><input
+                                placeholder="Nhập mã coupon" value="" class="input-coupon"
+                                data-reactid=".0.1.5.0.1.1.0">
+                            <button type="button" class="btn button-apply-coupon" data-reactid=".0.1.5.0.1.1.1">ÁP
+                                DỤNG
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="info-delivery" data-reactid=".0.1.6" style="display: block;"><label
+                    class="label-info-text lbl-normal" data-reactid=".0.1.6.0">Thời điểm giao hàng :</label><span
+                    class="lbl-bold" data-reactid=".0.1.6.1"> Giao hàng ngay</span></div>
+            <span data-reactid=".0.1.7"></span>
+            <div class="footer-info" data-reactid=".0.1.8">
+                <div class="btn-div" id="btn-div-menu" data-reactid=".0.1.8.0" style="display: none;">
+                    <button class="btn btn-submit-info" id="menu-btn" data-reactid=".0.1.8.0.0">CHỌN MÓN</button>
+                </div>
+                <div class="btn-div" id="btn-div-payment" data-reactid=".0.1.8.1" style="display: none;">
+                    <button class="btn btn-submit-info-active" id="payment-btn" data-reactid=".0.1.8.1.0">XEM GIỎ HÀNG
+                    </button>
+                </div>
+
+                <div class="footer" data-reactid=".0.1.8.3">
+                    <div class="div-hotline hidden" data-reactid=".0.1.8.3.0">
+                        <div data-reactid=".0.1.8.3.0.0">HOTLINE</div>
+                        <div class="hotline" data-reactid=".0.1.8.3.0.1">1800 6936</div>
+                    </div>
+                    <div id="btn-show-logout" class="clearfix footer-profile" data-toggle="modal"
+                         data-target="#loginModal" data-reactid=".0.1.8.3.1"><img src="assets/img/user_avatar.png?v=1"
+                                                                                  class="user-avatar"
+                                                                                  data-reactid=".0.1.8.3.1.0"><span
+                            class="name-user" data-reactid=".0.1.8.3.1.1">Đăng nhập để tích điểm</span><span
+                            class="point-user heartTCH hidden" data-reactid=".0.1.8.3.1.2"><span
+                            data-reactid=".0.1.8.3.1.2.0">0</span><span data-reactid=".0.1.8.3.1.2.1"> </span><i
+                            class="fa fa-heart heartTCH" aria-hidden="true" data-reactid=".0.1.8.3.1.2.2"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script src="assets/js/jquery-3.1.1.min.js"></script>
+
+
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700&amp;subset=latin-ext,vietnamese"
+      rel="stylesheet">
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+<link rel="stylesheet" href="assets/css/font-awesome-animation.min.css">
+<link rel="stylesheet" href="assets/css/swiper.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script defer="" src="assets/js/bootstrap.min.js"></script>
+<script defer="" src="assets/js/swiper.min.js"></script>
+<script defer="" src="assets/js/swiper.jquery.min.js"></script>
+<script defer="" src="assets/js/jquery-ui.min.js"></script>
+
+<script src="assets/js/maps.js"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAN6qFzPCIzC_V8MTnbY2WrvKPs7rK0CkY&callback=myMap"></script>
+
+<div class="pac-container pac-logo" style="width: 0px; position: absolute; left: 0px; top: 0px; display: none;">
+    <div class="pac-item"><span class="pac-icon pac-icon-marker"></span><span class="pac-item-query"><span
+            class="pac-matched">131</span></span><span><span class="pac-matched">Nam Kỳ Khởi Nghĩa</span>, <span
+            class="pac-matched">Bến Thành</span>, District 1, Ho Chi Minh City, Vietnam</span></div>
+</div>
+</body>
+</html>

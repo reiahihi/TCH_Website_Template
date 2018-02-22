@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>The Coffee House</title>
+
+    <style>
+        body {
+            font-family: 'Source Sans Pro', 'sans-serif' !important;
+            padding: 30px;
+            height: 100%;
+        }
+
+        .main {
+            color: #333;
+        }
+
+        #login-href {
+            cursor: pointer;
+        }
+
+        .main .title {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-top: 50px;
+        }
+
+        .main .title h3 {
+            margin-bottom: 0;
+            margin-top: 0;
+            font-weight: normal;
+        }
+
+        .main .title h2 {
+            margin-top: 10px;
+        }
+
+        .main .title p {
+            font-weight: 600;
+        }
+
+        .content-left,
+        .content-right {
+            width: 50%;
+            float: left;
+        }
+
+        .content-left img.tch {
+            max-width: 100%;
+            border: 4px solid #fff;
+            border-radius: 5px;
+        }
+
+        .content-right ul {
+            margin-top: 0;
+            margin-bottom: 10px;
+            padding-left: 30px;
+        }
+
+        .content-right ul li {
+            padding: 5px 0;
+        }
+
+        .content-right ul li span.icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+            margin-right: 5px;
+            border: 1px solid #fff;
+            font-size: 13px;
+        }
+
+        .content-right ul li.first {
+            font-size: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .content-right .notes {
+            font-style: italic;
+            font-size: 13px;
+            padding-left: 30px;
+        }
+
+        .clearfix:after {
+            clear: both;
+            content: "";
+            display: block;
+        }
+
+        .cam {
+            color: #FF792C;
+        }
+
+        .border-line {
+            background: url('/assets/img/Pattern.png') repeat center;
+            height: 10px;
+            background-size: contain !important;
+            margin-bottom: 30px;
+        }
+
+        @media screen and (max-width: 767px) {
+            .content-left,
+            .content-right {
+                width: 100%;
+                float: left;
+                margin-bottom: 10px;
+            }
+            .content-right ul {
+                margin-top: 0;
+                margin-bottom: 10px;
+                padding-left: 5px;
+            }
+            .content-right .notes {
+                font-style: italic;
+                font-size: 13px;
+                padding-left: 5px;
+            }
+        }
+        /* vietnamese */
+
+        @font-face {
+            font-family: 'Source Sans Pro';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Source Sans Pro'), local('SourceSansPro-Regular'), url(https://fonts.gstatic.com/s/sourcesanspro/v9/ODelI1aHBYDBqgeIAH2zlCxe5Tewm2_XWfbGchcXw4g.woff2) format('woff2');
+            unicode-range: U+0102-0103, U+1EA0-1EF9, U+20AB;
+        }
+        /* latin-ext */
+
+
+        @font-face {
+            font-family: 'Source Sans Pro';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Source Sans Pro'), local('SourceSansPro-Regular'), url(https://fonts.gstatic.com/s/sourcesanspro/v9/ODelI1aHBYDBqgeIAH2zlJbPFduIYtoLzwST68uhz_Y.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+        }
+        /* vietnamese */
+
+
+
+        @font-face {
+            font-family: 'Source Sans Pro';
+            font-style: normal;
+            font-weight: 700;
+            src: local('Source Sans Pro Bold'), local('SourceSansPro-Bold'), url(https://fonts.gstatic.com/s/sourcesanspro/v9/toadOcfmlt9b38dHJxOBGJkF8H8ye47wsfpWywda8og.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+        }
+        /* vietnamese */
+
+
+        @font-face {
+            font-family: 'Source Sans Pro';
+            font-style: italic;
+            font-weight: 400;
+            src: local('Source Sans Pro Italic'), local('SourceSansPro-It'), url(https://fonts.gstatic.com/s/sourcesanspro/v9/M2Jd71oPJhLKp0zdtTvoM2Sl3jWJ3D9poyJPMfASioc.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+        }
+    </style>
+</head>
+
+<body class="clearfix">
+<div class="main clarfix">
+    <div class="title">
+        <h3>ĐẶT HÀNG VÀ GIAO TẬN NƠI TẠI</h3>
+        <h2>THE COFFEE HOUSE DELIVERY</h2>
+        <p>Đừng quên
+            <span class="cam" id="login-href">Đăng nhập</span> vào tài khoản
+            <span class="cam">The Coffee House Rewards</span> của bạn để tích điểm và nhận các ưu đãi nhé!</p>
+    </div>
+    <!-- <div class="border-line"></div> -->
+    <div class="content">
+        <div class="content-left">
+            <img class="tch" src="assets/img/tch.jpg" alt="Giao hang tan noi">
+        </div>
+        <div class="content-right">
+            <ul style="list-style-type:none">
+                <li class="first">Các bước đặt món</li>
+                <li>
+                    <span class="icon">1</span> Điền thông tin nhận hàng (tên, số điện thoại, địa chỉ nhận hàng)</li>
+                <li>
+                    <span class="icon">2</span> Chọn món yêu thích</li>
+                <li>
+                    <span class="icon">3</span> Tối đa 30 phút
+                    <span class="cam">(*)</span> bạn sẽ có ngay món uống yêu thích!</li>
+            </ul>
+            <div class="notes cam">(*) Thời gian có thể khác nhau tùy thuộc vào vị trí và giao thông tại thời điểm đặt hàng</div>
+            <div class="notes cam">Thời gian phục vụ : 7h-20h</div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

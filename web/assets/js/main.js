@@ -7,11 +7,15 @@ setTimeout(function() {
         $(this).html($(this).html().replace(/&nbsp;/gi, ''));
     });
 }, 2000);
+
+
 $(window).on('load', function() {
     $("#iframe-main").contents().find("#login-href").click(function() {
         $('#loginModal').modal('show');
     })
-})
+});
+
+
 $('#numberAddress, #cityAddress, #districtAddress').click(function() {
     autocompleteGoogleMap();
     if ($('.map-container').css('opacity') == 0) {
@@ -35,7 +39,8 @@ $('#numberAddress, #cityAddress, #districtAddress').click(function() {
             first = true;
         }
     }
-})
+});
+
 $(window).resize(function() {
     setWidthPatternCatName();
     setHeightMenu();
@@ -412,14 +417,15 @@ $(window).on('load', function() {
     });
 
 });
+
 function timeOutLocation() {
     setTimeout(function() {
-        if (!getLocation) {
-            $('#my-current-location-button').hide();
-            $('.loading-map-mobile').hide();
-            $('.loading-map').hide();
-            $('.reload-location').hide();
-            $('.warning-location').show();
-        }
+        // if (!getLocation) {
+        //     // $('#my-current-location-button').hide();
+        //     // $('.loading-map-mobile').hide();
+        //     // $('.loading-map').hide();
+        //     // $('.reload-location').hide();
+        //     // $('.warning-location').show();
+        // }
     }, 10000)
 }

@@ -835,7 +835,7 @@ input[type="radio"].css-checkbox + label.css-label {
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     z-index: 10000000000;
-    background: url(/assets/img/menu.gif) center;
+    background: url(../img/menu.gif) center;
     background-size: cover !important;
 }
 
@@ -2028,11 +2028,11 @@ iframe {
 }
 
 html.bg-menu {
-    background: url(/assets/img/menu.gif?v=1) center no-repeat;
+    background: url(../img/menu.gif) center no-repeat;
 }
 
 html.bg-order {
-    background: url(/assets/img/order.gif?v=1) center no-repeat;
+    background: url(../img/menu.gif) center no-repeat;
 }
 
 .theme-mobile .tch-warning {
@@ -2464,7 +2464,7 @@ html.bg-order {
 }
 
 .iframe-main {
-    background: url(/assets/img/menu.gif?v=1);
+    background: url(../img/menu.gif);
     background-size: cover !important;
 }
 
