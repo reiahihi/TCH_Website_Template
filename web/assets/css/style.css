@@ -129,7 +129,7 @@ body {
 }
 
 .pad-address {
-    width: 4%;
+    width: 2%;
     display: inline-block;
 }
 
@@ -1025,7 +1025,7 @@ iframe {
     display: none;
     padding-top: 20px;
     height: 100%;
-    background-image: url(/assets/img/order-mobile.gif);
+    background-image: url(../img/order-mobile.gif);
     background-size: cover;
 }
 
@@ -1204,7 +1204,7 @@ iframe {
     overflow-y: auto;
     padding-top: 20px;
     padding-bottom: 50px;
-    background-image: url(/assets/img/order-mobile.gif);
+    background-image: url(../img/order-mobile.gif);
     background-size: cover;
 }
 
