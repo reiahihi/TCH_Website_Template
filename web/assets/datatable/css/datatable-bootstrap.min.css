@@ -1,0 +1,22 @@
+.sorting {
+    cursor: pointer;
+    background-image: url(../img/sort_both.png);
+    background: transparent;
+    d-repeat: no-repeat;
+    background-position: center right;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.sorting-desc {
+    background-image: url(../img/sort_desc.png)
+}
+
+.sorting-asc {
+    background-image: url(../img/sort_asc.png)
+}
+
+.datatable-load-bar {
+    width: 100%;
+    margin: 8px 0
+}

@@ -40,12 +40,12 @@ function getGeoCode(lat, lng) {
 
 
 function myMap() {
-    var myLatLng = {lat: 10.733476978551995, lng: 106.6552734375};
+    var myLatLng = {lat: 10.77752303308327, lng: 106.6945334820997};
     var mytest;
-
+    // 10.77752303308327 106.6945334820997
     var mapProp = {
-        center: new google.maps.LatLng(10.733476978551995, 106.6552734375),
-        zoom: 17,
+        center: new google.maps.LatLng(10.77752303308327, 106.6945334820997),
+        zoom: 15,
         fullscreenControl: false,
         streetViewControl: false
 
@@ -61,11 +61,13 @@ function myMap() {
 
     google.maps.event.addListener(map, 'drag', function () {
 //            console.log("drag");
+
         mytest = map.getCenter();
         marker.setPosition(map.getCenter());
     });
 
     google.maps.event.addListener(map, 'dragend', function () {
+        console.log(mytest.lat(), mytest.lng());
         getGeoCode(mytest.lat(), mytest.lng());
     });
 }

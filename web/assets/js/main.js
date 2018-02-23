@@ -411,6 +411,7 @@ $('.icon-edit-address-mobile').click(function() {
     $('.address-component-mobile').slideToggle();
     $('.order-component-mobile').slideToggle();
 });
+
 $(window).on('load', function() {
     $('.cat-name-mobile').click(function() {
         $(this).closest('.category-name-container').find('.item-container-mobile').slideToggle();

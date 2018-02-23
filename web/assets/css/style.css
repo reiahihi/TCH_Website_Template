@@ -586,7 +586,7 @@ body {
 }
 
 .menu-content-container {
-    height: 650px;
+    height: 910px;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 }
@@ -1347,7 +1347,7 @@ iframe {
 .menu-content-container::-webkit-scrollbar,
 .order-content-wrapper::-webkit-scrollbar,
 .scrollbar-custom::-webkit-scrollbar {
-    width: 6px;
+    width: 5px;
     background-color: rgba(255, 255, 255, 0.2);
 }
 
