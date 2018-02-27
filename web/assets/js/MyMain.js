@@ -1,4 +1,5 @@
-$('.category-name-container').click(function () {
+$('.category-name-container').click(function ()
+{
     var countItem = $(this).closest('.content-menu-wrapper').find('.category-content-small').find('.item-box').length;
     var catRow = Math.floor(countItem / 4);
     var catHeight = (countItem % 4 === 0) ? catRow * 310 : (catRow + 1) * 300;
@@ -10,7 +11,8 @@ var countItem = 0;
 var totalPrice = 0;
 var items = [];
 
-$('.col-variant').click(function () {
+$('.col-variant').click(function ()
+{
     var item = [];
     var itemName = $(this).parent().prev().find('.name_item').text();
     var itemSize = ($(this).attr('class').includes('col-first')) ? 'small' : 'regular';
@@ -21,30 +23,37 @@ $('.col-variant').click(function () {
 
     //check item duplication
 
-    if (items.length > 0) {
+    if (items.length > 0)
+    {
         var flag = true;
-        for (var i = 0; i < items.length; i++) {
-            if (items[i][0][0] === item[0][0]) {
-                if (items[i][0][1][0] === item[0][1][0]) {
+        for (var i = 0; i < items.length; i++)
+        {
+            if (items[i][0][0] === item[0][0])
+            {
+                if (items[i][0][1][0] === item[0][1][0])
+                {
                     items[i][0][1][1]++;
                     flag = false;
                 }
             }
         }
-        if (flag) {
+        if (flag)
+        {
             items.push(item);
         }
     }
-    else {
+    else
+    {
         items.push(item);
     }
 
 
     console.log('-----------------');
-    for (var i = 0; i < items.length; i++) {
+    for (var i = 0; i < items.length; i++)
+    {
 
         console.log(items[i][0][0] + " - " + items[i][0][1][0] +
-            " - " + items[i][0][1][1] + " - " + items[i][0][1][2]);
+                " - " + items[i][0][1][1] + " - " + items[i][0][1][2]);
 
     }
 
@@ -54,15 +63,18 @@ $('.col-variant').click(function () {
     $('.quantity-info-cart').text(countItem);
     $('#total-price').text(totalPrice + '.000');
 
-    if (countItem > 0) {
+    if (countItem > 0)
+    {
         $('#btn-div-payment').find('.btn').removeClass('btn-submit-info-inactive').addClass('btn-submit-info-active');
     }
 });
 
-$('#numberAddress').click(function () {
+$('#numberAddress').click(function ()
+{
 
     console.log($('.map-container').css('opacity'));
-    if ($('.map-container').css('opacity') === '0') {
+    if ($('.map-container').css('opacity') === '0')
+    {
         $('.iframe-main').hide();
         $('.map-container').css('opacity', '1').slideToggle();
         $('#close-map').show();
@@ -71,21 +83,26 @@ $('#numberAddress').click(function () {
 
 });
 
-$('#close-map').click(function () {
+$('#close-map').click(function ()
+{
     $('.map-container').css('opacity', 0).slideToggle();
     $('#close-map').hide();
-    if (window.location.hash === '#menu') {
+    if (window.location.hash === '#menu')
+    {
         // $('.menu').slideToggle();
     }
-    else if (window.location.hash === '#order') {
+    else if (window.location.hash === '#order')
+    {
         // $('.order').slideToggle();
     }
-    else {
+    else
+    {
         $('.iframe-main').slideToggle();
     }
 });
 
-$('#btn-div-menu').click(function () {
+$('#btn-div-menu').click(function ()
+{
     window.location.hash = '#menu';
     $('.iframe-main').hide();
     $('.menu').slideToggle();
@@ -93,11 +110,13 @@ $('#btn-div-menu').click(function () {
     $('#btn-div-payment').show();
 });
 
-$('#cart-btn').click(function () {
+$('#cart-btn').click(function ()
+{
 
     var status = $(this).attr('class');
 
-    if (status !== 'btn btn-submit-info-inactive') {
+    if (status !== 'btn btn-submit-info-inactive')
+    {
         window.location.hash = '#order';
         $('.iframe-main').hide();
         $('.map-container').css('display', 'none');
@@ -112,13 +131,29 @@ $('#cart-btn').click(function () {
 
 });
 
-$('#return-menu').click(function () {
+$('#return-menu').click(function ()
+{
     $('.menu').slideToggle();
     $('#btn-div-menu').hide();
     $('#btn-div-payment').show();
     $('#btn-div-submit-order').hide();
 });
 
-$('#payment-btn').click(function () {
+$('#payment-btn').click(function ()
+{
     alert('AHIHI XONG RỒI');
-})
+});
+
+$('#btn-show-logout').click(function ()
+{
+    console.log('log modal');
+});
+
+
+$(window).on('load', function ()
+{
+    $("#iframe-main").contents().find("#login-href").click(function ()
+    {
+        $('#loginModal').modal('show');
+    })
+});
